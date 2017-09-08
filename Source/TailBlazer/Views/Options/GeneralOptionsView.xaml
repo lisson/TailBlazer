@@ -20,7 +20,8 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*" />
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="11.403"/>
+            <RowDefinition Height="17.74"/>
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -28,8 +29,8 @@
         </Grid.RowDefinitions>
 
 
-        <TextBlock  Text="Look And Feel" FontSize="16" FontWeight="SemiBold"/>
-        <Grid Grid.Row="1" Margin="8">
+        <TextBlock  Text="Look And Feel" FontSize="16" FontWeight="SemiBold" Margin="0,0,-0.714,162" Grid.RowSpan="2"/>
+        <Grid Grid.Row="1" Margin="0,16,15.857,0.429">
             <Grid.Resources>
                 <Style TargetType="{x:Type Slider}" BasedOn="{StaticResource MaterialDesignSlider}">
                     <Setter Property="Width" Value="150"/>
@@ -40,7 +41,7 @@
                 <Style TargetType="{x:Type TextBlock}">
                     <Setter Property="VerticalAlignment" Value="Center"/>
                     <Setter Property="Margin" Value="4 6 4 6"/>
-                </Style> 
+                </Style>
             </Grid.Resources>
 
             <Grid.RowDefinitions>
@@ -83,13 +84,17 @@
                       VerticalAlignment="Center"
                       Margin="4"
                       IsChecked="{Binding  OpenRecentOnStartup}" />
+            <ComboBox HorizontalAlignment="Left" Margin="0.286,45.571,0,-6.143" Grid.Row="3" VerticalAlignment="Top" Width="166" Grid.ColumnSpan="2" Height="24" Grid.Column="1"
+                      ItemsSource="{Binding FontList}"
+                      SelectedValue="{Binding Path=CurrentFont}"/>
+            <TextBlock Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Margin="4,52.571,0.714,-7.429"><Run Text="Font"/></TextBlock>
         </Grid>
 
         <TextBlock
-            Margin="0 8 0 0"
-            Text="Performance" Grid.Row="2" FontSize="16" FontWeight="SemiBold" />
+            Margin="0,8,0.286,0.143"
+            Text="Performance" Grid.Row="2" FontSize="16" FontWeight="SemiBold" Grid.RowSpan="2" />
 
-        <Grid Grid.Row="3" Margin="8 8 8 0" Height="32">
+        <Grid Grid.Row="4" Margin="8,7.857,8.286,0.143" Height="32">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
@@ -130,7 +135,7 @@
         </Grid>
 
 
-        <Grid Grid.Row="5" Margin="8">
+        <Grid Grid.Row="5" Margin="8,7.857,8.286,8.143" Grid.RowSpan="2">
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />

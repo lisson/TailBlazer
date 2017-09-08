@@ -8,8 +8,9 @@
         public int Scale { get; }
         public int Rating { get; }
         public bool OpenRecentOnStartup { get; }
+        public string FontFamily { get; }
 
-        public GeneralOptions(Theme theme, bool highlightTail, double highlightTailDuration, int scale, int rating, bool openRecentOnStartup)
+        public GeneralOptions(Theme theme, bool highlightTail, double highlightTailDuration, int scale, int rating, bool openRecentOnStartup, string fontFamily)
         {
             Theme = theme;
             HighlightTail = highlightTail;
@@ -17,6 +18,7 @@
             Scale = scale;
             Rating = rating;
             OpenRecentOnStartup = openRecentOnStartup;
+            FontFamily = fontFamily;
         }
 
     }

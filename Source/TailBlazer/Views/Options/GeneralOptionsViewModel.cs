@@ -4,6 +4,9 @@ using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Windows;
 using System.Windows.Input;
+using System.Drawing.Text;
+using System.Drawing;
+using System.Collections.ObjectModel;
 using DynamicData.Binding;
 using TailBlazer.Domain.Formatting;
 using TailBlazer.Domain.Infrastructure;
@@ -24,11 +27,19 @@ namespace TailBlazer.Views.Options
         private bool _useDarkTheme;
         private int _rating;
         private bool _openRecentOnStartup;
+        private string _fontFamily;
+        private readonly ObservableCollection<string> _fontList = new ObservableCollection<string>();
 
         public GeneralOptionsViewModel(ISetting<GeneralOptions> setting, 
             IRatingService ratingService,
             ISchedulerProvider schedulerProvider)
         {
+            InstalledFontCollection installedFontCollection = new InstalledFontCollection();
+            foreach (FontFamily ff in installedFontCollection.Families)
+            {
+                _fontList.Add(ff.Name);
+            }
+
             var reader = setting.Value.Subscribe(options =>
             {
                 UseDarkTheme = options.Theme== Theme.Dark;
@@ -37,6 +48,7 @@ namespace TailBlazer.Views.Options
                 Scale = options.Scale;
                 Rating = options.Rating;
                 OpenRecentOnStartup = options.OpenRecentOnStartup;
+                CurrentFont = options.FontFamily;
             });
 
             RequiresRestart = setting.Value.Select(options => options.Rating)
@@ -52,7 +64,7 @@ namespace TailBlazer.Views.Options
             var writter = this.WhenAnyPropertyChanged()
                 .Subscribe(vm =>
                 {
-                    setting.Write(new GeneralOptions(UseDarkTheme ? Theme.Dark : Theme.Light, HighlightTail, HighlightDuration, Scale, Rating, OpenRecentOnStartup));
+                    setting.Write(new GeneralOptions(UseDarkTheme ? Theme.Dark : Theme.Light, HighlightTail, HighlightDuration, Scale, Rating, OpenRecentOnStartup, CurrentFont));
                 });
             
             HighlightDurationText = this.WhenValueChanged(vm=>vm.HighlightDuration)
@@ -82,6 +94,11 @@ namespace TailBlazer.Views.Options
         public IProperty<string> ScaleText { get;  }
 
         public IProperty<string> HighlightDurationText { get; }
+
+        public ObservableCollection<string> FontList
+        {
+            get { return _fontList; }
+        }
 
         public bool UseDarkTheme
         {
@@ -117,6 +134,12 @@ namespace TailBlazer.Views.Options
         {
             get { return _openRecentOnStartup; }
             set { SetAndRaise(ref _openRecentOnStartup, value); }
+        }
+
+        public string CurrentFont
+        {
+            get { return _fontFamily;  }
+            set { SetAndRaise(ref _fontFamily, value); }
         }
 
         void IDisposable.Dispose()

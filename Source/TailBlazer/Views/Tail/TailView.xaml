@@ -288,6 +288,7 @@
                     ItemsSource="{Binding Lines}" 
                     SelectedItem="{Binding SelectedItem}"
                     Style="{StaticResource LinesListBoxStyle}"
+                    FontFamily="{Binding GeneralOptionBindings.CurrentFont.Value}"
                     
                     infrastucture:ListBoxHelper.SelectionMonitor="{Binding SelectionMonitor}">
 

@@ -15,7 +15,8 @@ namespace TailBlazer.Views.Tail
     {
         public IProperty<bool> HighlightTail { get; }
         public IProperty<bool> UsingDarkTheme { get; }
-        
+        public IProperty<string> CurrentFont { get; }
+
         private readonly IDisposable _cleanUp;
 
         public GeneralOptionBindings([NotNull] ISetting<GeneralOptions> generalOptions, ISchedulerProvider schedulerProvider)
@@ -30,7 +31,12 @@ namespace TailBlazer.Views.Tail
                 .Select(options => options.HighlightTail)
                 .ForBinding();
 
-            _cleanUp = new CompositeDisposable(UsingDarkTheme, HighlightTail);
+            CurrentFont = generalOptions.Value
+            .ObserveOn(schedulerProvider.MainThread)
+            .Select(options => options.FontFamily)
+            .ForBinding();
+
+            _cleanUp = new CompositeDisposable(UsingDarkTheme, HighlightTail, CurrentFont);
         }
 
         public void Dispose()

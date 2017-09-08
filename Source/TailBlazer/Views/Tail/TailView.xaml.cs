@@ -31,5 +31,10 @@ namespace TailBlazer.Views.Tail
         {
             FocusSearchTextBox();
         }
+
+        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }
