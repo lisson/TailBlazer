@@ -9,8 +9,9 @@
         public int Rating { get; }
         public bool OpenRecentOnStartup { get; }
         public string FontFamily { get; }
+        public double Linespace { get; }
 
-        public GeneralOptions(Theme theme, bool highlightTail, double highlightTailDuration, int scale, int rating, bool openRecentOnStartup, string fontFamily)
+        public GeneralOptions(Theme theme, bool highlightTail, double highlightTailDuration, int scale, int rating, bool openRecentOnStartup, string fontFamily, double lineSpace)
         {
             Theme = theme;
             HighlightTail = highlightTail;
@@ -19,6 +20,7 @@
             Rating = rating;
             OpenRecentOnStartup = openRecentOnStartup;
             FontFamily = fontFamily;
+            Linespace = lineSpace;
         }
 
     }

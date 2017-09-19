@@ -16,21 +16,21 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
-    <Grid>
+    <Grid Height="304">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="11.403"/>
-            <RowDefinition Height="17.74"/>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*" />
+            <RowDefinition Height="69*" />
+            <RowDefinition Height="0"/>
+            <RowDefinition Height="10.286"/>
+            <RowDefinition Height="25*" />
+            <RowDefinition Height="Auto" MinHeight="5.429"/>
+            <RowDefinition Height="Auto" MinHeight="6.286"/>
+            <RowDefinition Height="0*" />
         </Grid.RowDefinitions>
 
 
-        <TextBlock  Text="Look And Feel" FontSize="16" FontWeight="SemiBold" Margin="0,0,-0.714,162" Grid.RowSpan="2"/>
-        <Grid Grid.Row="1" Margin="0,16,15.857,0.429">
+        <TextBlock  Text="Look And Feel" FontSize="16" FontWeight="SemiBold" Margin="0,0,-0.714,96.857" Grid.RowSpan="2"/>
+        <Grid Grid.Row="1" Margin="0,16,16.286,0.857">
             <Grid.Resources>
                 <Style TargetType="{x:Type Slider}" BasedOn="{StaticResource MaterialDesignSlider}">
                     <Setter Property="Width" Value="150"/>
@@ -79,22 +79,26 @@
                       Margin="4"
                       IsChecked="{Binding  HighlightTail}" />
 
-            <TextBlock Grid.Row="3" Grid.Column="0" VerticalAlignment="Center">Open Recent Files On Startup?</TextBlock>
+            <TextBlock Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Margin="4,5.571,2.714,46.429">Open Recent Files On Startup?</TextBlock>
             <CheckBox Grid.Row="3" Grid.Column="1"
                       VerticalAlignment="Center"
-                      Margin="4"
+                      Margin="4.286,4.571,3.857,45.429"
                       IsChecked="{Binding  OpenRecentOnStartup}" />
-            <ComboBox HorizontalAlignment="Left" Margin="0.286,45.571,0,-6.143" Grid.Row="3" VerticalAlignment="Top" Width="166" Grid.ColumnSpan="2" Height="24" Grid.Column="1"
+            <ComboBox HorizontalAlignment="Left" Margin="6.429,27.571,-1,0" Grid.Row="3" VerticalAlignment="Top" Width="166" Grid.ColumnSpan="3" Height="24" Grid.Column="1"
                       ItemsSource="{Binding FontList}"
                       SelectedValue="{Binding Path=CurrentFont}"/>
-            <TextBlock Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Margin="4,52.571,0.714,-7.429"><Run Text="Font"/></TextBlock>
+            <TextBlock Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Margin="4,35.571,159.714,16.429" Height="16" Grid.ColumnSpan="2"><Run Text="Font"/></TextBlock>
+            <TextBlock Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Margin="4,62.571,159.857,-8.286" Height="16" Text="Line Spacing" Grid.ColumnSpan="2"/>
+            <Slider Grid.Column="1" HorizontalAlignment="Left" Margin="6.429,62.571,0,0" Grid.Row="3" VerticalAlignment="Top"
+                    Maximum="2" Minimum="1" TickFrequency="0.1" IsSnapToTickEnabled="True"
+                    Value="{Binding Linespace}"/>
         </Grid>
 
         <TextBlock
-            Margin="0,8,0.286,0.143"
-            Text="Performance" Grid.Row="2" FontSize="16" FontWeight="SemiBold" Grid.RowSpan="2" />
+            Margin="0,1.857,0.286,29"
+            Text="Performance" Grid.Row="4" FontSize="16" FontWeight="SemiBold" />
 
-        <Grid Grid.Row="4" Margin="8,7.857,8.286,0.143" Height="32">
+        <Grid Grid.Row="4" Margin="6,30.857,10.286,13">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
@@ -135,7 +139,7 @@
         </Grid>
 
 
-        <Grid Grid.Row="5" Margin="8,7.857,8.286,8.143" Grid.RowSpan="2">
+        <Grid Grid.Row="6" Margin="8,2.286,8.286,4">
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />

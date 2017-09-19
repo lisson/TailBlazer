@@ -28,6 +28,7 @@ namespace TailBlazer.Views.Options
         private int _rating;
         private bool _openRecentOnStartup;
         private string _fontFamily;
+        private double _linespace;
         private readonly ObservableCollection<string> _fontList = new ObservableCollection<string>();
 
         public GeneralOptionsViewModel(ISetting<GeneralOptions> setting, 
@@ -49,6 +50,7 @@ namespace TailBlazer.Views.Options
                 Rating = options.Rating;
                 OpenRecentOnStartup = options.OpenRecentOnStartup;
                 CurrentFont = options.FontFamily;
+                Linespace = options.Linespace;
             });
 
             RequiresRestart = setting.Value.Select(options => options.Rating)
@@ -64,7 +66,7 @@ namespace TailBlazer.Views.Options
             var writter = this.WhenAnyPropertyChanged()
                 .Subscribe(vm =>
                 {
-                    setting.Write(new GeneralOptions(UseDarkTheme ? Theme.Dark : Theme.Light, HighlightTail, HighlightDuration, Scale, Rating, OpenRecentOnStartup, CurrentFont));
+                    setting.Write(new GeneralOptions(UseDarkTheme ? Theme.Dark : Theme.Light, HighlightTail, HighlightDuration, Scale, Rating, OpenRecentOnStartup, CurrentFont, Linespace) );
                 });
             
             HighlightDurationText = this.WhenValueChanged(vm=>vm.HighlightDuration)
@@ -140,6 +142,12 @@ namespace TailBlazer.Views.Options
         {
             get { return _fontFamily;  }
             set { SetAndRaise(ref _fontFamily, value); }
+        }
+
+        public double Linespace
+        {
+            get { return _linespace;  }
+            set { SetAndRaise(ref _linespace, value ); }
         }
 
         void IDisposable.Dispose()

@@ -16,6 +16,7 @@ namespace TailBlazer.Views.Tail
         public IProperty<bool> HighlightTail { get; }
         public IProperty<bool> UsingDarkTheme { get; }
         public IProperty<string> CurrentFont { get; }
+        public IProperty<double> Linespace { get; }
 
         private readonly IDisposable _cleanUp;
 
@@ -32,11 +33,16 @@ namespace TailBlazer.Views.Tail
                 .ForBinding();
 
             CurrentFont = generalOptions.Value
-            .ObserveOn(schedulerProvider.MainThread)
-            .Select(options => options.FontFamily)
-            .ForBinding();
+                .ObserveOn(schedulerProvider.MainThread)
+                .Select(options => options.FontFamily)
+                .ForBinding();
 
-            _cleanUp = new CompositeDisposable(UsingDarkTheme, HighlightTail, CurrentFont);
+            Linespace = generalOptions.Value
+                .ObserveOn(schedulerProvider.MainThread)
+                .Select(options => options.Linespace*20) // 20 is the default height
+                .ForBinding();
+
+            _cleanUp = new CompositeDisposable(UsingDarkTheme, HighlightTail, CurrentFont, Linespace);
         }
 
         public void Dispose()

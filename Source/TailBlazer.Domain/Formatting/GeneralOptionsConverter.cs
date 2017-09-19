@@ -17,6 +17,7 @@ namespace TailBlazer.Domain.Formatting
             public const string Rating = "FrameRate";
             public const string OpenRecentOnStartup = "OpenRecentOnStartup";
             public const string FontFamily = "FontFamily";
+            public const string Linespace = "Linespace";
         }
 
         public GeneralOptions Convert(State state)
@@ -33,8 +34,9 @@ namespace TailBlazer.Domain.Formatting
             var frameRate = root.OptionalElement(Structure.Rating).ConvertOr(rate=>rate.ParseInt().Value, () => defaults.Rating);
             var openRecent = root.ElementOrThrow(Structure.OpenRecentOnStartup).ParseBool().ValueOr(() => defaults.OpenRecentOnStartup);
             var ff = root.ElementOrThrow(Structure.FontFamily);
+            var ls = root.OptionalElement(Structure.Linespace).ConvertOr(l => l.ParseInt().Value, () => defaults.Linespace);
 
-            return new GeneralOptions(theme,highlight, duration,scale, frameRate, openRecent, ff);
+            return new GeneralOptions(theme,highlight, duration,scale, frameRate, openRecent, ff, ls);
         }
 
         public State Convert(GeneralOptions options)
@@ -47,6 +49,7 @@ namespace TailBlazer.Domain.Formatting
             root.Add(new XElement(Structure.Rating, options.Rating));
             root.Add(new XElement(Structure.OpenRecentOnStartup, options.OpenRecentOnStartup));
             root.Add(new XElement(Structure.FontFamily, options.FontFamily));
+            root.Add(new XElement(Structure.Linespace, options.Linespace));
             var doc = new XDocument(root);
             var value= doc.ToString();
             return new State(1, value);
@@ -54,7 +57,7 @@ namespace TailBlazer.Domain.Formatting
 
         public GeneralOptions GetDefaultValue()
         {
-            return new GeneralOptions(Theme.Light, true, 5, 100, 5, true, "Consolas");
+            return new GeneralOptions(Theme.Light, true, 5, 100, 5, true, "Consolas", 1);
         }
     }
 }

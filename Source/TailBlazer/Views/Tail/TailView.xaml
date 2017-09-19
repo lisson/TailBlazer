@@ -294,7 +294,7 @@
 
                     <ListBox.ItemsPanel>
                         <ItemsPanelTemplate>
-                            <virtualisation:LinesScrollPanel ItemHeight="20"
+                            <virtualisation:LinesScrollPanel ItemHeight="{Binding GeneralOptionBindings.Linespace.Value}"
                                                 ScrollReceiver="{Binding}"  
                                                 StartIndex="{Binding FirstIndex}"
                                                 TotalItems="{Binding LatestCount.Value}"
